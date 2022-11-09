@@ -31,6 +31,7 @@ public class Health : MonoBehaviour, IDamageable
         if (_currentHealth <= 0)
         {
             Kill();
+            SceneManager.LoadScene("Restart");
         }
     }
 
@@ -42,6 +43,7 @@ public class Health : MonoBehaviour, IDamageable
         if (_currentHealth <= 0)
         {
             Kill();
+            SceneManager.LoadScene("Restart");
         }
     }
 
