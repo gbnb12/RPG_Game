@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Inheritance;
 
-public class AttackMissile : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
+namespace indexer
+{ 
+    public class AttackMissile : Projectile
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        protected override void Impact(Collision otherCollision)
+        {
+            //gameObject.SetActive(false);
+        }
     }
 }

@@ -19,6 +19,14 @@ namespace Inheritance
 
         }
 
+        private void Awake()
+        {
+            if(RB == null)
+            {
+                RB = GetComponent<Rigidbody>();
+            }
+        }
+
         private void FixedUpdate()
         {
             Move();
