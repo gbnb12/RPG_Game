@@ -12,6 +12,7 @@ public class InputController : MonoBehaviour
     public event Action PressedLaser = delegate { };
     public event Action PressedHeal = delegate { };
 
+    
 
     private void Update()
     {
@@ -69,6 +70,7 @@ public class InputController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
+            
             PressedHeal?.Invoke();
 
         }

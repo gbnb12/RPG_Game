@@ -41,13 +41,20 @@ public class PlayerTurn : TurnGameState
 
         // hook into events
         StateMachine.Input.PressedConfirm += OnPressedConfirm;
+
         StateMachine.Input.PressedAttack += OnPressedAttack;
-        //StateMachine.Input.PressedLaser += OnPressedLaser;
         StateMachine.Input.PressedHeal += OnPressedHeal;
+
+        StateMachine.Input.PressedHeal += ObjectsHeal;
+        StateMachine.Input.PressedAttack += ObjectsAttack;
+        
+
+        //ObjectsHeal();
 
         if (_laserCountdown >= 3)
         {
             StateMachine.Input.PressedLaser += OnPressedLaser;
+            StateMachine.Input.PressedLaser += ObjectsLaser;
         }
 
         _laserTextUI.GetComponent<Text>().text = "Laser: " + _laserCountdown;
@@ -63,15 +70,18 @@ public class PlayerTurn : TurnGameState
         StateMachine.Input.PressedLaser -= OnPressedLaser;
         StateMachine.Input.PressedHeal -= OnPressedHeal;
 
+        StateMachine.Input.PressedHeal -= ObjectsHeal;
+
         _AttackDamageTextUI.gameObject.SetActive(false);
         _HealDamageTextUI.gameObject.SetActive(false);
         _LaserDamageTextUI.gameObject.SetActive(false);
+
         _AttackDamageImage.gameObject.SetActive(false);
         _HealDamageImage.gameObject.SetActive(false);
         _LaserDamageImage.gameObject.SetActive(false);
 
-        healObject01.SetActive(false);
-        healObject02.SetActive(false);
+        healObject01.gameObject.SetActive(false);
+        healObject02.gameObject.SetActive(false);
 
         Debug.Log("Player Turn; Exit");
     }
@@ -91,8 +101,6 @@ public class PlayerTurn : TurnGameState
         if (damage != null)
         {
             damage.TakeAttackDamage(20);
-            _AttackDamageTextUI.gameObject.SetActive(true);
-            _AttackDamageImage.gameObject.SetActive(true);
         }
         StateMachine.ChangeState<AITurn>();
     }
@@ -106,8 +114,6 @@ public class PlayerTurn : TurnGameState
         {
             number.TakeLaserDamage(30);
             _laserCountdown -= 3;
-            _LaserDamageTextUI.gameObject.SetActive(true);
-            _LaserDamageImage.gameObject.SetActive(true);
             _laserTextUI.GetComponent<Text>().text = "Laser: " + _laserCountdown;
         }
         StateMachine.ChangeState<AITurn>();
@@ -116,15 +122,34 @@ public class PlayerTurn : TurnGameState
     void OnPressedHeal()
     {
         Debug.Log("Player recovers!");
-        healObject01.SetActive(true);
-        healObject02.SetActive(true);
+        
         IDamageable recover = _playerPiece.GetComponent<IDamageable>();
         if (recover != null)
-        {
-            _HealDamageTextUI.gameObject.SetActive(true);
-            _HealDamageImage.gameObject.SetActive(true);
+        {      
             recover.Heal(10);
         }
         StateMachine.ChangeState<AITurn>();
     }
+
+    void ObjectsHeal()
+    {
+        healObject01.gameObject.SetActive(true);
+        healObject02.gameObject.SetActive(true);
+
+        _HealDamageTextUI.gameObject.SetActive(true);
+        _HealDamageImage.gameObject.SetActive(true);
+    }
+
+    void ObjectsAttack()
+    {
+        _AttackDamageTextUI.gameObject.SetActive(true);
+        _AttackDamageImage.gameObject.SetActive(true);
+    }
+
+    void ObjectsLaser()
+    {
+        _LaserDamageTextUI.gameObject.SetActive(true);
+        _LaserDamageImage.gameObject.SetActive(true);
+    }
+
 }
