@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b770a47f1c9e03343a5972fceb3ae402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.04
+  Speed: 0.02
   RB: {fileID: 3913090510654478136}
   _hitSound: {fileID: 8300000, guid: 57e695387a8788f41bffedf311ea76cc, type: 3}
   _hitParticle: {fileID: 5155594166786028054, guid: c19baffc9296a70418699b6d40980eb8, type: 3}
