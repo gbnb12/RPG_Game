@@ -28,6 +28,16 @@ public class PlayerTurn : TurnGameState
     public GameObject healObject01;
     public GameObject healObject02;
 
+    public GameObject attack;
+
+    public GameObject laser;
+
+    public Transform firePosition;
+
+    [SerializeField] protected AudioClip _shootAttackSound;
+    [SerializeField] protected AudioClip _shootLaserSound;
+    [SerializeField] protected AudioClip _healSound;
+
 
     public override void Enter()
     {
@@ -138,18 +148,47 @@ public class PlayerTurn : TurnGameState
 
         _HealDamageTextUI.gameObject.SetActive(true);
         _HealDamageImage.gameObject.SetActive(true);
+        HealFeedback();
     }
 
     void ObjectsAttack()
     {
         _AttackDamageTextUI.gameObject.SetActive(true);
         _AttackDamageImage.gameObject.SetActive(true);
+        Instantiate(attack, firePosition.position, firePosition.rotation);
+        AttackFeedback();
     }
 
     void ObjectsLaser()
     {
         _LaserDamageTextUI.gameObject.SetActive(true);
         _LaserDamageImage.gameObject.SetActive(true);
+        Instantiate(laser, firePosition.position, firePosition.rotation);
+        LaserFeedback();
+    }
+
+    private void AttackFeedback()
+    {
+        if (_shootAttackSound != null)
+        {
+            AudioHelper.PlayClip2D(_shootAttackSound, 1f);
+        }
+    }
+
+    private void LaserFeedback()
+    {
+        if (_shootLaserSound != null)
+        {
+            AudioHelper.PlayClip2D(_shootLaserSound, 1f);
+        }
+    }
+
+    private void HealFeedback()
+    {
+        if (_shootLaserSound != null)
+        {
+            AudioHelper.PlayClip2D(_healSound, 1f);
+        }
     }
 
 }

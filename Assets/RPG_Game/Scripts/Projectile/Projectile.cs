@@ -8,15 +8,18 @@ namespace Inheritance
 
     public abstract class Projectile : MonoBehaviour
     {
-        protected abstract void Impact(Collision otherCollision);
+        protected abstract void Impact(Collision collision);
 
         [SerializeField] protected float Speed = .25f;
         [SerializeField] protected Rigidbody RB;
 
+        [SerializeField] protected AudioClip _hitSound;
+        [SerializeField] protected ParticleSystem _hitParticle;
+
         private void OnCollisionEnter(Collision collision)
         {
             Impact(collision);
-
+            Feedback();
         }
 
         private void Awake()
@@ -36,6 +39,20 @@ namespace Inheritance
         {
             Vector3 moveOffset = transform.forward * Speed;
             RB.MovePosition(RB.position + moveOffset);
+        }
+
+        private void Feedback()
+        {
+            if (_hitParticle != null)
+            {
+                _hitParticle = Instantiate(_hitParticle,
+                    transform.position, Quaternion.identity);
+            }
+
+            if (_hitSound != null)
+            {
+                AudioHelper.PlayClip2D(_hitSound, 1f);
+            }
         }
     }
 }
