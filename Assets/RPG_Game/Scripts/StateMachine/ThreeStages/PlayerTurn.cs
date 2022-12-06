@@ -32,12 +32,12 @@ public class PlayerTurn : TurnGameState
 
     public GameObject laser;
 
-    public Transform firePosition;
-
-    [SerializeField] protected AudioClip _shootAttackSound;
-    [SerializeField] protected AudioClip _shootLaserSound;
+    [SerializeField] protected AudioClip _hitAttackSound;
+    [SerializeField] protected AudioClip _hitLaserSound;
     [SerializeField] protected AudioClip _healSound;
 
+    public GameObject attackObject;
+    public GameObject laserObject;
 
     public override void Enter()
     {
@@ -92,6 +92,9 @@ public class PlayerTurn : TurnGameState
 
         healObject01.gameObject.SetActive(false);
         healObject02.gameObject.SetActive(false);
+
+        attackObject.gameObject.SetActive(false);
+        laserObject.gameObject.SetActive(false);
 
         Debug.Log("Player Turn; Exit");
     }
@@ -155,7 +158,10 @@ public class PlayerTurn : TurnGameState
     {
         _AttackDamageTextUI.gameObject.SetActive(true);
         _AttackDamageImage.gameObject.SetActive(true);
-        Instantiate(attack, firePosition.position, firePosition.rotation);
+
+        attackObject.gameObject.SetActive(true);
+        
+
         AttackFeedback();
     }
 
@@ -163,29 +169,36 @@ public class PlayerTurn : TurnGameState
     {
         _LaserDamageTextUI.gameObject.SetActive(true);
         _LaserDamageImage.gameObject.SetActive(true);
-        Instantiate(laser, firePosition.position, firePosition.rotation);
+
+        laserObject.gameObject.SetActive(true);
+
         LaserFeedback();
     }
 
     private void AttackFeedback()
     {
-        if (_shootAttackSound != null)
+        if (_hitAttackSound != null)
         {
-            AudioHelper.PlayClip2D(_shootAttackSound, 1f);
+            AudioHelper.PlayClip2D(_hitAttackSound, 1f);
+            
         }
+
+        
     }
 
     private void LaserFeedback()
     {
-        if (_shootLaserSound != null)
+        if (_hitLaserSound != null)
         {
-            AudioHelper.PlayClip2D(_shootLaserSound, 1f);
+            AudioHelper.PlayClip2D(_hitLaserSound, 1f);
         }
+
+        
     }
 
     private void HealFeedback()
     {
-        if (_shootLaserSound != null)
+        if (_healSound != null)
         {
             AudioHelper.PlayClip2D(_healSound, 1f);
         }

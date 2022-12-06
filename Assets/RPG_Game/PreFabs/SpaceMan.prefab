@@ -885,6 +885,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1978460758442282575}
+  - component: {fileID: 636154214}
+  - component: {fileID: 636154213}
   m_Layer: 0
   m_Name: SpaceMan
   m_TagString: Untagged
@@ -901,7 +903,7 @@ Transform:
   m_GameObject: {fileID: 1978460758442282574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.24025144, y: 0.24025144, z: 0.24025144}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1978460759053094664}
@@ -919,6 +921,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &636154214
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978460758442282574}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9999992, y: 3.3293278, z: 2.060254}
+  m_Center: {x: 0, y: 1.1646657, z: 0.53012884}
+--- !u!114 &636154213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978460758442282574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18c0ffdcd66a5a04dad0196906dab4aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHealth: 100
+  _healthText: {fileID: 0}
+  targetObject: {fileID: 1978460758442282574}
 --- !u!1 &1978460758626234124
 GameObject:
   m_ObjectHideFlags: 0
